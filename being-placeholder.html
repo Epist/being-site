@@ -45,6 +45,25 @@
             border-radius: 50%;
             animation: breathe 8s ease-in-out infinite;
             pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Centered background flower image */
+        body::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 100%;
+            background-image: url('flower-heartflower.png');
+            background-size: 75% 133%;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.10;
+            pointer-events: none;
+            z-index: 0;
         }
 
         @keyframes breathe {
@@ -108,13 +127,13 @@
         }
 
         /* Subtle decorative line */
-        .divider {
+        /*.divider {
             width: 60px;
             height: 1px;
             background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
             margin: 2rem auto;
             animation: fadeIn 2s ease-out 0.75s both;
-        }
+        } */
 
         /* Optional: very subtle noise texture */
         .noise {
@@ -133,7 +152,7 @@
     <div class="noise"></div>
     <div class="container">
         <h1 class="logo">Being</h1>
-        <p class="tagline">A feed shaped by you, for you</p>
+        <p class="tagline">Personalization by users, for users</p>
         <div class="divider"></div>
         <p class="subtitle">Stay tuned</p>
     </div>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Being</title>
+    <title>belove</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&display=swap" rel="stylesheet">
@@ -84,16 +84,26 @@
         }
 
         .logo {
-            font-size: clamp(3.5rem, 10vw, 6rem);
+            font-size: clamp(4.5rem, 12vw, 8rem);
             font-weight: 300;
-            letter-spacing: 0.4em;
+            letter-spacing: 0.2em;
             text-transform: lowercase;
             margin-bottom: 3rem;
-            background: linear-gradient(180deg, #ffffff 0%, #a0a0a0 100%);
+            animation: fadeIn 2s ease-out;
+        }
+
+        .logo .be {
+            background: linear-gradient(180deg, #a0a0a0 0%, #30638E 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            animation: fadeIn 2s ease-out;
+        }
+
+        .logo .love {
+            background: linear-gradient(180deg, #a0a0a0 0%, #D1495B 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .tagline {
@@ -151,8 +161,8 @@
 <body>
     <div class="noise"></div>
     <div class="container">
-        <h1 class="logo">Being</h1>
-        <p class="tagline">Personalization by users, for users</p>
+        <h1 class="logo"><span class="be">be</span><span class="love">love</span></h1>
+        <p class="tagline">your digital life organized<br>by you, for you</p>
         <div class="divider"></div>
         <p class="subtitle">Stay tuned</p>
     </div>

@@ -164,7 +164,25 @@
         <h1 class="logo"><span class="be">be</span><span class="love">love</span></h1>
         <p class="tagline">your digital life organized<br>by you, for you</p>
         <div class="divider"></div>
-        <p class="subtitle">Stay tuned</p>
+                <form id="waitlist" class="subtitle" style="margin-top:0.5rem; display: flex; justify-content: center; align-items: center; gap: 0.5em;">
+                    <input type="email" name="email" required placeholder="email" style="font-family: inherit; font-size: 1em; padding: 0.4em 0.8em; border: none; border-radius: 2em; background: rgba(255,255,255,0.12); color: #fff; outline: none; letter-spacing: 0.1em; min-width: 210px; max-width: 270px; box-shadow: 0 1px 4px 0 rgba(0,0,0,0.03); text-align: center;">
+                    <button type="submit" style="font-family: inherit; font-size: 1.3em; background: none; border: none; color: #fff; cursor: pointer; padding: 0 0.5em; border-radius: 50%; transition: background 0.2s; line-height: 1;">→</button>
+                </form>
+                <script>
+                    document.getElementById('waitlist').addEventListener('submit', async (e) => {
+                        e.preventDefault();
+                        const email = e.target.email.value;
+                        try {
+                            await fetch('https://script.google.com/macros/s/AKfycbwgvQZokvo5vzS4Ngs2PmpyJjQYX3zdo_BwuErL0ehHaKFgydop0AwDJTU4ALrawFwhfw/exec', {
+                                method: 'POST',
+                                body: JSON.stringify({ email })
+                            });
+                            e.target.outerHTML = "<p class=\"subtitle\">We'll be in touch.</p>";
+                        } catch {
+                            e.target.outerHTML = "<p class=\"subtitle\">Something went wrong. Try again in a moment.</p>";
+                        }
+                    });
+                </script>
     </div>
 </body>
 </html>

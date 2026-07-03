@@ -2,7 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#003D5B">
+    <meta name="description" content="belove — your digital life organized by you, for you. Join the waitlist.">
+    <meta property="og:title" content="belove">
+    <meta property="og:description" content="your digital life organized by you, for you">
+    <meta property="og:url" content="https://being.love">
+    <meta property="og:image" content="https://being.love/android-chrome-512x512.png">
+    <meta name="twitter:card" content="summary">
     <title>belove</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,52 +25,58 @@
             box-sizing: border-box;
         }
 
-        html, body {
+        html {
+            /* Seam-proof fallback: anything painted beyond the page
+               (pinch-zoom out, overscroll bounce) shows this flat color */
+            background-color: #003D5B;
             height: 100%;
         }
 
         body {
             font-family: 'Gloria Hallelujah', cursive;
-            background: linear-gradient(135deg, #EDAE49 0%, #003D5B 50%, #D1495B 100%);
             color: #f5f5f5;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
+            min-height: 100svh;
+            overflow-x: hidden;
+        }
+
+        /* Background as a fixed viewport-sized layer: it can never tile,
+           and everything decorative inside it is clipped so nothing
+           overflows the viewport */
+        .backdrop {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            background: linear-gradient(135deg, #EDAE49 0%, #003D5B 50%, #D1495B 100%);
             overflow: hidden;
-            position: relative;
+            pointer-events: none;
         }
 
         /* Subtle animated gradient orb */
-        body::before {
-            content: '';
-            position: absolute;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(99, 102, 241, 0.08) 0%, transparent 70%);
-            border-radius: 50%;
-            animation: breathe 8s ease-in-out infinite;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        /* Centered background flower image */
-        body::after {
+        .backdrop::before {
             content: '';
             position: absolute;
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%);
-            width: 110%;
-            height: 110%;
-            background-image: url('true-heartflower-medium-colored_1024.png');
-            background-size: contain;
-            background-position: center;
-            background-repeat: no-repeat;
+            width: 600px;
+            height: 600px;
+            margin: -300px 0 0 -300px;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: breathe 8s ease-in-out infinite;
+        }
+
+        /* Centered background flower image */
+        .backdrop::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url('true-heartflower-medium-colored_1024.png') center / contain no-repeat;
             opacity: 0.10;
-            pointer-events: none;
-            z-index: 0;
         }
 
         @keyframes breathe {
@@ -79,8 +92,9 @@
 
         .container {
             text-align: center;
-            z-index: 1;
             padding: 2rem;
+            padding-left: max(2rem, env(safe-area-inset-left));
+            padding-right: max(2rem, env(safe-area-inset-right));
         }
 
         .logo {
@@ -125,6 +139,47 @@
             animation: fadeIn 2s ease-out 1s both;
         }
 
+        .waitlist {
+            margin-top: 0.5rem;
+        }
+
+        .waitlist input[type="email"] {
+            font-family: inherit;
+            font-size: 1em;
+            padding: 0.4em 0.8em;
+            border: none;
+            border-radius: 2em;
+            background: rgba(255, 255, 255, 0.12);
+            color: #fff;
+            outline: none;
+            letter-spacing: 0.1em;
+            min-width: 210px;
+            max-width: 270px;
+            box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.03);
+            text-align: center;
+            display: block;
+            margin: 0 auto 0.5em;
+        }
+
+        .waitlist input[type="email"]::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .waitlist button {
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 0.95em;
+            letter-spacing: 0.12em;
+            text-align: center;
+            animation: fadeIn 2s ease-out 1.2s both;
+            text-transform: none;
+            font-family: inherit;
+            cursor: pointer;
+            display: block;
+            margin: 0 auto;
+        }
+
         @keyframes fadeIn {
             from {
                 opacity: 0;
@@ -136,22 +191,10 @@
             }
         }
 
-        /* Subtle decorative line */
-        /*.divider {
-            width: 60px;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            margin: 2rem auto;
-            animation: fadeIn 2s ease-out 0.75s both;
-        } */
-
-        /* Optional: very subtle noise texture */
+        /* Very subtle noise texture */
         .noise {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            inset: 0;
             pointer-events: none;
             opacity: 0.03;
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
@@ -159,30 +202,31 @@
     </style>
 </head>
 <body>
+    <div class="backdrop"></div>
     <div class="noise"></div>
     <div class="container">
         <h1 class="logo"><span class="be">be</span><span class="love">love</span></h1>
         <p class="tagline">your digital life organized<br>by you, for you</p>
-        <div class="divider"></div>
-                                <form id="waitlist" class="subtitle" style="margin-top:0.5rem; display: block; text-align: center;">
-                                    <input type="email" name="email" required placeholder="email" style="font-family: inherit; font-size: 1em; padding: 0.4em 0.8em; border: none; border-radius: 2em; background: rgba(255,255,255,0.12); color: #fff; outline: none; letter-spacing: 0.1em; min-width: 210px; max-width: 270px; box-shadow: 0 1px 4px 0 rgba(0,0,0,0.03); text-align: center; display: block; margin: 0 auto 0.5em auto;">
-                                    <button type="submit" style="background: none; border: none; color: rgba(255,255,255,0.4); font-size: 0.95em; letter-spacing: 0.12em; text-align: center; animation: fadeIn 2s ease-out 1.2s both; text-transform: none; font-family: inherit; cursor: pointer; display: block; margin: 0 auto;">join the waitlist</button>
-                                </form>
-                <script>
-                    document.getElementById('waitlist').addEventListener('submit', async (e) => {
-                        e.preventDefault();
-                        const email = e.target.email.value;
-                        try {
-                            await fetch('https://script.google.com/macros/s/AKfycbwgvQZokvo5vzS4Ngs2PmpyJjQYX3zdo_BwuErL0ehHaKFgydop0AwDJTU4ALrawFwhfw/exec', {
-                                method: 'POST',
-                                body: JSON.stringify({ email })
-                            });
-                            e.target.outerHTML = "<p class=\"subtitle\">We'll be in touch.</p>";
-                        } catch {
-                            e.target.outerHTML = "<p class=\"subtitle\">Something went wrong. Try again in a moment.</p>";
-                        }
-                    });
-                </script>
+        <form id="waitlist" class="waitlist subtitle">
+            <input type="email" name="email" required placeholder="email" autocomplete="email">
+            <button type="submit">join the waitlist</button>
+        </form>
     </div>
+    <script>
+        document.getElementById('waitlist').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = e.target.email.value;
+            try {
+                await fetch('https://script.google.com/macros/s/AKfycbwgvQZokvo5vzS4Ngs2PmpyJjQYX3zdo_BwuErL0ehHaKFgydop0AwDJTU4ALrawFwhfw/exec', {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    body: JSON.stringify({ email })
+                });
+                e.target.outerHTML = "<p class=\"subtitle\">We'll be in touch.</p>";
+            } catch {
+                e.target.outerHTML = "<p class=\"subtitle\">Something went wrong. Try again in a moment.</p>";
+            }
+        });
+    </script>
 </body>
 </html>

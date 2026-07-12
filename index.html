@@ -7,18 +7,35 @@
     <meta name="description" content="belove — your digital life organized by you, for you. Join the waitlist.">
     <meta property="og:title" content="belove">
     <meta property="og:description" content="your digital life organized by you, for you">
-    <meta property="og:url" content="https://being.love">
-    <meta property="og:image" content="https://being.love/android-chrome-512x512.png">
+    <meta property="og:url" content="https://www.being.love">
+    <meta property="og:image" content="https://www.being.love/android-chrome-512x512.png">
     <meta name="twitter:card" content="summary">
     <title>belove</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&display=swap" rel="stylesheet">
+    <link rel="canonical" href="https://www.being.love/">
+    <link rel="preload" href="fonts/gloria-hallelujah-latin.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="manifest" href="/site.webmanifest">
     <style>
+        @font-face {
+            font-family: 'Gloria Hallelujah';
+            font-style: normal;
+            font-weight: 400;
+            font-display: swap;
+            src: url('fonts/gloria-hallelujah-latin.woff2') format('woff2');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+        }
+
+        @font-face {
+            font-family: 'Gloria Hallelujah';
+            font-style: normal;
+            font-weight: 400;
+            font-display: swap;
+            src: url('fonts/gloria-hallelujah-latin-ext.woff2') format('woff2');
+            unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -143,6 +160,15 @@
             margin-top: 0.5rem;
         }
 
+        /* Honeypot: invisible to humans, tempting to spam bots */
+        .waitlist input[name="website"] {
+            position: absolute;
+            left: -9999px;
+            width: 1px;
+            height: 1px;
+            opacity: 0;
+        }
+
         .waitlist input[type="email"] {
             font-family: inherit;
             font-size: 1em;
@@ -208,6 +234,7 @@
         <h1 class="logo"><span class="be">be</span><span class="love">love</span></h1>
         <p class="tagline">your digital life organized<br>by you, for you</p>
         <form id="waitlist" class="waitlist subtitle">
+            <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
             <input type="email" name="email" required placeholder="email" autocomplete="email">
             <button type="submit">join the waitlist</button>
         </form>
@@ -215,6 +242,11 @@
     <script>
         document.getElementById('waitlist').addEventListener('submit', async (e) => {
             e.preventDefault();
+            if (e.target.website.value) {
+                // Honeypot filled: a bot. Show success without submitting.
+                e.target.outerHTML = "<p class=\"subtitle\">We'll be in touch.</p>";
+                return;
+            }
             const email = e.target.email.value;
             try {
                 await fetch('https://script.google.com/macros/s/AKfycbwgvQZokvo5vzS4Ngs2PmpyJjQYX3zdo_BwuErL0ehHaKFgydop0AwDJTU4ALrawFwhfw/exec', {
@@ -228,5 +260,6 @@
             }
         });
     </script>
+    <script data-goatcounter="https://beinglove.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </body>
 </html>

@@ -2,34 +2,74 @@
 import Base from '../layouts/Base.astro';
 ---
 <Base>
-    <div class="container">
-        <h1 class="logo"><span class="be">be</span><span class="love">love</span></h1>
-        <p class="tagline">your digital life organized<br>by you, for you</p>
-        <form id="waitlist" class="waitlist subtitle">
+    <section class="hero">
+        <div class="container">
+            <h1 class="logo"><span class="be">be</span><span class="love">love</span></h1>
+            <p class="tagline">your digital life organized<br>by you, for you</p>
+            <form class="waitlist subtitle">
+                <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+                <input type="email" name="email" required placeholder="email" autocomplete="email">
+                <button type="submit">join the waitlist</button>
+            </form>
+        </div>
+        <a class="scroll-hint" href="#story" aria-label="read more">↓</a>
+    </section>
+
+    <section class="section" id="story">
+        <h2>the noise</h2>
+        <p>Every app on your phone wants something from you. Your feeds are tuned for outrage, and your notifications are engineered to interrupt. What matters to you is buried in what profits someone else.</p>
+        <p>You are the most important person in your own life, and yet almost nothing on your phone is designed to serve you.</p>
+    </section>
+
+    <section class="section">
+        <h2>one quiet surface</h2>
+        <p>belove sits between you and the digital world. It gathers your messages, news, feeds, and events in one place and filters them through a single question: <em>what will actually support you right now?</em></p>
+        <p>It doesn't replace your apps. It reads across them and surfaces only what is worth your attention.</p>
+    </section>
+
+    <section class="section">
+        <h2>tuned by you</h2>
+        <p>belove learns who you are because you tell it about your interests, your goals, and the person you're becoming. This isn't a setting buried in a menu. It's a living picture of you that you can see, shape, and refine anytime.</p>
+        <p>There are no engagement tricks and no optimizing for clicks. belove simply shows you what helps.</p>
+    </section>
+
+    <section class="section">
+        <h2>built to be trusted</h2>
+        <p>belove is made by BeingWell Technologies, a public benefit corporation. We don't sell ads and we don't monetize your attention. We do well only when you're well.</p>
+        <p><a href="/about/">more about us</a></p>
+    </section>
+
+    <section class="section">
+        <h2>be first</h2>
+        <p>belove is in early development. Leave your email and we'll be in touch as it becomes real.</p>
+        <form class="waitlist subtitle">
             <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
             <input type="email" name="email" required placeholder="email" autocomplete="email">
             <button type="submit">join the waitlist</button>
         </form>
-    </div>
+    </section>
+
     <script>
-        document.getElementById('waitlist').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            if (e.target.website.value) {
-                // Honeypot filled: a bot. Show success without submitting.
-                e.target.outerHTML = "<p class=\"subtitle\">We'll be in touch.</p>";
-                return;
-            }
-            const email = e.target.email.value;
-            try {
-                await fetch('https://script.google.com/macros/s/AKfycbwgvQZokvo5vzS4Ngs2PmpyJjQYX3zdo_BwuErL0ehHaKFgydop0AwDJTU4ALrawFwhfw/exec', {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    body: JSON.stringify({ email })
-                });
-                e.target.outerHTML = "<p class=\"subtitle\">We'll be in touch.</p>";
-            } catch {
-                e.target.outerHTML = "<p class=\"subtitle\">Something went wrong. Try again in a moment.</p>";
-            }
+        document.querySelectorAll('form.waitlist').forEach((form) => {
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                if (form.website.value) {
+                    // Honeypot filled: a bot. Show success without submitting.
+                    form.outerHTML = "<p class=\"subtitle\">We'll be in touch.</p>";
+                    return;
+                }
+                const email = form.email.value;
+                try {
+                    await fetch('https://script.google.com/macros/s/AKfycbwgvQZokvo5vzS4Ngs2PmpyJjQYX3zdo_BwuErL0ehHaKFgydop0AwDJTU4ALrawFwhfw/exec', {
+                        method: 'POST',
+                        mode: 'no-cors',
+                        body: JSON.stringify({ email })
+                    });
+                    form.outerHTML = "<p class=\"subtitle\">We'll be in touch.</p>";
+                } catch {
+                    form.outerHTML = "<p class=\"subtitle\">Something went wrong. Try again in a moment.</p>";
+                }
+            });
         });
     </script>
 </Base>

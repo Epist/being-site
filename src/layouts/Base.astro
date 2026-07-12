@@ -8,7 +8,7 @@ interface Props {
 
 const {
   title = 'belove',
-  description = 'belove — your digital life organized by you, for you. Join the waitlist.',
+  description = 'belove: your digital life organized by you, for you. Join the waitlist.',
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site);
@@ -37,6 +37,12 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <div class="backdrop"></div>
     <div class="noise"></div>
     <slot />
+    <footer class="site-footer">
+        <nav>
+            <a href="/about/">about</a>·<a href="/privacy/">privacy</a>·<a href="mailto:hello@being.love">contact</a>
+        </nav>
+        <p class="legal">&copy; 2026 BeingWell Technologies, PBC</p>
+    </footer>
     <script data-goatcounter="https://beinglove.goatcounter.com/count" async src="https://gc.zgo.at/count.js" is:inline></script>
 </body>
 </html>

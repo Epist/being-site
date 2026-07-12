@@ -1,0 +1,35 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base>
+    <div class="container">
+        <h1 class="logo"><span class="be">be</span><span class="love">love</span></h1>
+        <p class="tagline">your digital life organized<br>by you, for you</p>
+        <form id="waitlist" class="waitlist subtitle">
+            <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+            <input type="email" name="email" required placeholder="email" autocomplete="email">
+            <button type="submit">join the waitlist</button>
+        </form>
+    </div>
+    <script>
+        document.getElementById('waitlist').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            if (e.target.website.value) {
+                // Honeypot filled: a bot. Show success without submitting.
+                e.target.outerHTML = "<p class=\"subtitle\">We'll be in touch.</p>";
+                return;
+            }
+            const email = e.target.email.value;
+            try {
+                await fetch('https://script.google.com/macros/s/AKfycbwgvQZokvo5vzS4Ngs2PmpyJjQYX3zdo_BwuErL0ehHaKFgydop0AwDJTU4ALrawFwhfw/exec', {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    body: JSON.stringify({ email })
+                });
+                e.target.outerHTML = "<p class=\"subtitle\">We'll be in touch.</p>";
+            } catch {
+                e.target.outerHTML = "<p class=\"subtitle\">Something went wrong. Try again in a moment.</p>";
+            }
+        });
+    </script>
+</Base>

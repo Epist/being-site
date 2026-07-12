@@ -1,0 +1,42 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'belove',
+  description = 'belove — your digital life organized by you, for you. Join the waitlist.',
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site);
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#003D5B">
+    <meta name="description" content={description}>
+    <meta property="og:title" content={title}>
+    <meta property="og:description" content="your digital life organized by you, for you">
+    <meta property="og:url" content={canonical}>
+    <meta property="og:image" content="https://www.being.love/android-chrome-512x512.png">
+    <meta name="twitter:card" content="summary">
+    <title>{title}</title>
+    <link rel="canonical" href={canonical}>
+    <link rel="preload" href="/fonts/gloria-hallelujah-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+</head>
+<body>
+    <div class="backdrop"></div>
+    <div class="noise"></div>
+    <slot />
+    <script data-goatcounter="https://beinglove.goatcounter.com/count" async src="https://gc.zgo.at/count.js" is:inline></script>
+</body>
+</html>

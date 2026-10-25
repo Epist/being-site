@@ -7,8 +7,8 @@ interface Props {
 }
 
 const {
-  title = 'belove',
-  description = 'belove: your digital life organized by you, for you. Join the waitlist.',
+  title = 'belove · your digital life, designed by you, for you',
+  description = 'belove: your digital life designed by you, for you. Join the waitlist.',
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site);
@@ -21,10 +21,13 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <meta name="theme-color" content="#003D5B">
     <meta name="description" content={description}>
     <meta property="og:title" content={title}>
-    <meta property="og:description" content="your digital life organized by you, for you">
+    <meta property="og:description" content={description}>
     <meta property="og:url" content={canonical}>
-    <meta property="og:image" content="https://www.being.love/android-chrome-512x512.png">
-    <meta name="twitter:card" content="summary">
+    <meta property="og:image" content="https://www.being.love/og-card.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="belove: your digital life designed by you, for you">
+    <meta name="twitter:card" content="summary_large_image">
     <title>{title}</title>
     <link rel="canonical" href={canonical}>
     <link rel="preload" href="/fonts/gloria-hallelujah-latin.woff2" as="font" type="font/woff2" crossorigin>

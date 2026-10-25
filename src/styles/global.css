@@ -94,6 +94,7 @@ body {
     inset: 0;
     background: url('/true-heartflower-medium-colored_1024.png') center / contain no-repeat;
     opacity: 0.10;
+    filter: blur(1.5px);
 }
 
 @keyframes breathe {
@@ -120,12 +121,12 @@ body {
     letter-spacing: 0.2em;
     text-transform: lowercase;
     margin-bottom: .25rem;
-    animation: fadeIn 2s ease-out;
+    animation: fadeIn 1s ease-out;
 }
 
 .logo .be,
 .wordmark .be {
-    background: linear-gradient(180deg, #a0a0a0 0%, #30638E 100%);
+    background: linear-gradient(180deg, #b4c2cf 0%, #4a80b8 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -146,7 +147,7 @@ body {
     letter-spacing: 0.15em;
     color: rgba(255, 255, 255, 0.75);
     margin-bottom: 1rem;
-    animation: fadeIn 2s ease-out 0.5s both;
+    animation: fadeIn 1s ease-out 0.25s both;
 }
 
 .subtitle {
@@ -155,7 +156,7 @@ body {
     letter-spacing: 0.35em;
     text-transform: uppercase;
     color: rgba(255, 255, 255, 0.4);
-    animation: fadeIn 2s ease-out 1s both;
+    animation: fadeIn 1s ease-out 0.5s both;
 }
 
 .waitlist {
@@ -190,22 +191,36 @@ body {
 }
 
 .waitlist input[type="email"]::placeholder {
-    color: rgba(255, 255, 255, 0.5);
+    color: rgba(255, 255, 255, 0.65);
 }
 
 .waitlist button {
-    background: none;
+    background: rgba(255, 255, 255, 0.92);
     border: none;
-    color: rgba(255, 255, 255, 0.4);
+    border-radius: 2em;
+    padding: 0.45em 1.5em;
+    color: #003D5B;
     font-size: 0.95em;
     letter-spacing: 0.12em;
     text-align: center;
-    animation: fadeIn 2s ease-out 1.2s both;
+    animation: fadeIn 1s ease-out 0.6s both;
     text-transform: none;
     font-family: inherit;
     cursor: pointer;
     display: block;
     margin: 0 auto;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.waitlist button:hover {
+    background: #fff;
+    transform: translateY(-1px);
+}
+
+.waitlist button:focus-visible {
+    outline: 2px solid rgba(255, 255, 255, 0.9);
+    outline-offset: 3px;
 }
 
 @keyframes fadeIn {
@@ -235,9 +250,9 @@ body {
     left: 50%;
     transform: translateX(-50%);
     color: rgba(255, 255, 255, 0.35);
-    font-size: 1.1rem;
+    font-size: 1.6rem;
     text-decoration: none;
-    animation: fadeIn 2s ease-out 2s both, drift 3s ease-in-out 4s infinite;
+    animation: fadeIn 1s ease-out 1s both, drift 3s ease-in-out 2s infinite;
 }
 
 @keyframes drift {
@@ -248,7 +263,7 @@ body {
 /* Landing page story sections */
 .section {
     max-width: 42rem;
-    padding: 4.5rem 2rem;
+    padding: 3rem 2rem;
     padding-left: max(2rem, env(safe-area-inset-left));
     padding-right: max(2rem, env(safe-area-inset-right));
     text-align: center;
@@ -385,4 +400,17 @@ body {
     font-size: 0.75rem;
     letter-spacing: 0.08em;
     color: rgba(255, 255, 255, 0.3);
+}
+
+/* Honor the visitor's "reduce motion" system setting:
+   show everything immediately, with nothing animating */
+@media (prefers-reduced-motion: reduce) {
+    .logo,
+    .tagline,
+    .subtitle,
+    .waitlist button,
+    .scroll-hint,
+    .backdrop::before {
+        animation: none;
+    }
 }

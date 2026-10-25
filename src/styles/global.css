@@ -432,6 +432,13 @@ body {
     font-size: 0.92em;
 }
 
+/* The product name in body text, set as a small handwritten accent */
+.bl {
+    font-family: 'Gloria Hallelujah', cursive;
+    font-size: 0.92em;
+    color: #e0778b;
+}
+
 /* Site footer */
 .site-footer {
     font-family: 'Nunito', sans-serif;

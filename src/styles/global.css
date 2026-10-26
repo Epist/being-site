@@ -439,6 +439,58 @@ body {
     color: #e0778b;
 }
 
+/* Team page */
+.person {
+    margin-top: 2.25rem;
+}
+
+.person .photo {
+    display: block;
+    width: 8.5rem;
+    height: 8.5rem;
+    margin: 0 auto;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid rgba(255, 255, 255, 0.35);
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.18);
+}
+
+.person .photo + h2 {
+    margin-top: 1rem;
+}
+
+.person .role {
+    font-family: 'Nunito', sans-serif;
+    text-align: center;
+    font-size: 0.74rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.45);
+    margin: -0.25rem 0 1.1rem;
+}
+
+.team-divider {
+    display: flex;
+    justify-content: center;
+    margin-top: 2.75rem;
+}
+
+.team-divider svg {
+    width: 0.9rem;
+    height: 0.9rem;
+    fill: #D1495B;
+    opacity: 0.55;
+}
+
+.team-closing {
+    text-align: center;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.prose .team-closing:first-of-type {
+    margin-top: 2.5rem;
+}
+
 /* Site footer */
 .site-footer {
     font-family: 'Nunito', sans-serif;

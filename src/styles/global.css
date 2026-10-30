@@ -34,7 +34,7 @@
 html {
     /* Seam-proof fallback: anything painted beyond the page
        (pinch-zoom out, overscroll bounce) shows this flat color */
-    background-color: #003D5B;
+    background-color: #242d38;
     height: 100%;
 }
 
@@ -68,7 +68,7 @@ body {
     position: fixed;
     inset: 0;
     z-index: -1;
-    background: linear-gradient(135deg, #EDAE49 0%, #003D5B 50%, #D1495B 100%);
+    background: radial-gradient(ellipse at 50% 38%, #34404e 0%, #242d38 52%, #171d25 100%);
     overflow: hidden;
     pointer-events: none;
 }
@@ -87,16 +87,6 @@ body {
     animation: breathe 8s ease-in-out infinite;
 }
 
-/* Centered background flower image */
-.backdrop::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: url('/true-heartflower-medium-colored_1024.png') center / contain no-repeat;
-    opacity: 0.10;
-    filter: blur(1.5px);
-}
-
 @keyframes breathe {
     0%, 100% {
         transform: scale(1);
@@ -113,6 +103,13 @@ body {
     padding: 2rem;
     padding-left: max(2rem, env(safe-area-inset-left));
     padding-right: max(2rem, env(safe-area-inset-right));
+}
+
+/* The hero is its own stacking context so the flower glow can sit
+   behind the wordmark and tagline without dropping behind the backdrop */
+.hero .container {
+    position: relative;
+    isolation: isolate;
 }
 
 .logo {
@@ -148,6 +145,35 @@ body {
     color: rgba(255, 255, 255, 0.75);
     margin-bottom: 1rem;
     animation: fadeIn 1s ease-out 0.25s both;
+}
+
+/* The heartflower as a soft glow behind the wordmark. Its center sits on
+   the top edge of the tagline, so it lands in the same place at every
+   screen size. It lives in the hero and scrolls away with it. */
+.tag-wrap {
+    position: relative;
+}
+
+.glow {
+    position: absolute;
+    z-index: -1;
+    left: 50%;
+    top: 0;
+    --s: clamp(19rem, 92vmin, 46rem);
+    width: var(--s);
+    height: var(--s);
+    transform: translate(-50%, -50%);
+    color: #fff;
+    --rose: #e07a8a;
+    opacity: 0.13;
+    filter: blur(1.5px);
+    pointer-events: none;
+    animation: glowIn 1.6s ease-out;
+}
+
+@keyframes glowIn {
+    from { opacity: 0; }
+    to { opacity: 0.13; }
 }
 
 .subtitle {
@@ -356,6 +382,69 @@ body {
     text-underline-offset: 3px;
 }
 
+/* The river sentence breaks after "streams" where the first clause fits
+   on one line; on narrow screens it wraps naturally in balanced lines */
+.river br.wide {
+    display: inline;
+}
+
+@media (max-width: 38.75em) {
+    .river br.wide {
+        display: none;
+    }
+
+    .section p {
+        text-wrap: balance;
+    }
+}
+
+/* The heartflower drawn crisp as a diagram: inbound streams around the
+   petals, "you" at the calm center */
+.diagram {
+    position: relative;
+    width: min(21rem, 72vw);
+    aspect-ratio: 1;
+    margin: 2.25rem auto 0.5rem;
+}
+
+.diagram .flower {
+    width: 100%;
+    height: 100%;
+    display: block;
+    color: rgba(255, 255, 255, 0.62);
+    --rose: #D1495B;
+}
+
+.diagram .lbl {
+    position: absolute;
+    left: var(--x);
+    top: var(--y);
+    transform: translate(var(--ax, -50%), -50%);
+    font-family: 'Gloria Hallelujah', cursive;
+    font-size: clamp(0.78rem, 2.2vw, 0.95rem);
+    letter-spacing: 0.06em;
+    color: #f0c278;
+    white-space: nowrap;
+    pointer-events: none;
+}
+
+.diagram .lbl.l {
+    --ax: -100%;
+}
+
+.diagram .lbl.r {
+    --ax: 0%;
+}
+
+.diagram .lbl.you {
+    font-size: clamp(0.7rem, 2vw, 0.82rem);
+    letter-spacing: 0.16em;
+    padding: 0.05em 0.55em 0 0.7em;
+    border-radius: 1em;
+    background: rgba(36, 45, 56, 0.92);
+    line-height: 1.6;
+}
+
 /* Long-form pages (privacy, about) */
 .page {
     width: 100%;
@@ -531,6 +620,7 @@ body {
     .waitlist button,
     .waitlist button:hover svg,
     .scroll-hint,
+    .glow,
     .backdrop::before {
         animation: none;
     }

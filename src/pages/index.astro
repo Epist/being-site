@@ -5,7 +5,11 @@ import Base from '../layouts/Base.astro';
     <section class="hero">
         <div class="container">
             <h1 class="logo"><span class="be">be</span><span class="love">love</span></h1>
-            <p class="tagline">your digital life designed<br>by you, for you</p>
+            <div class="tag-wrap">
+                <!-- The heartflower as a soft glow, centered just above the tagline -->
+                <svg class="glow" viewBox="0 0 300 300" aria-hidden="true"><use href="/heartflower-lines.svg#flower"/></svg>
+                <p class="tagline">your digital life designed<br>by you, for you</p>
+            </div>
             <form class="waitlist subtitle">
                 <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
                 <div class="pill">
@@ -22,14 +26,19 @@ import Base from '../layouts/Base.astro';
     </section>
 
     <section class="section" id="story">
-        <h2>the noise</h2>
-        <p>Every app on your phone wants something from you. Your feeds are tuned to pull you in. What you love is buried in what profits someone else.</p>
-    </section>
-
-    <section class="section">
         <h2>one magical surface</h2>
-        <p><span class="bl">belove</span> sits between you and the digital world. It gathers your messages, feeds, events, and other inbound streams into one river, which it filters and organizes around a single question:<br><em>what do you really need right now?</em></p>
-        <p>What matters and some magic rise to the surface. The rest flows on.</p>
+        <p class="river"><span class="bl">belove</span> gathers your messages, feeds, events, and other inbound streams<br class="wide"> into one river and asks a single question:<br><em>what do you really need right now?</em></p>
+        <p>What matters rises to the surface. The rest flows on.</p>
+        <figure class="diagram" aria-label="many streams in, one calm center">
+            <svg class="flower" viewBox="0 0 300 300" aria-hidden="true"><use href="/heartflower-lines.svg#flower"/></svg>
+            <span class="lbl l" style="--x:11%;--y:31%">messages</span>
+            <span class="lbl r" style="--x:89%;--y:31%">feeds</span>
+            <span class="lbl l" style="--x:10%;--y:67%">events</span>
+            <span class="lbl r" style="--x:90%;--y:67%">news</span>
+            <span class="lbl" style="--x:31%;--y:95%">calendar</span>
+            <span class="lbl" style="--x:69%;--y:95%">. . .</span>
+            <span class="lbl you" style="--x:50%;--y:50%">you</span>
+        </figure>
     </section>
 
     <section class="section">
@@ -39,13 +48,13 @@ import Base from '../layouts/Base.astro';
 
     <section class="section">
         <h2>built to be trusted</h2>
-        <p><span class="bl">belove</span> is made by BeingWell Technologies, a public benefit corporation. We don't sell ads and we don't monetize your attention. We do well only when you're well.</p>
+        <p><span class="bl">belove</span> is made by BeingWell Technologies, a public benefit corporation. We don't sell ads or your attention. We do well only when you're well.</p>
         <p><a href="/about/">more about us</a></p>
     </section>
 
     <section class="section">
         <h2>be first</h2>
-        <p><span class="bl">belove</span> is in early development. Leave your email and we'll be in touch as it becomes real.</p>
+        <p><span class="bl">belove</span> is in early development.</p>
         <form class="waitlist subtitle">
             <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
                 <div class="pill">
